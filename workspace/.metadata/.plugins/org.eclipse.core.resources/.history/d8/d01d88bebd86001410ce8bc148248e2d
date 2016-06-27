@@ -1,0 +1,10 @@
+
+package ch.hearc.coursjava.moo.enumeration.quadratic;
+
+
+
+public enum ABC
+	{
+	
+	}
+

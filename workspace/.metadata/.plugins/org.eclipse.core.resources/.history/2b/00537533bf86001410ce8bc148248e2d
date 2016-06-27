@@ -1,0 +1,37 @@
+
+package ch.hearc.coursjava.moo.enumeration.quadratic;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+
+public class UseQuadraticEnumB
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		parse(args);
+
+		}
+
+
+
+
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+	private static Map<ABC,Double> parser(String[] args)
+		{
+		// TODO Auto-generated method stub
+		mapABC = new HashMap<ABC,Double>(3);
+		args.toDouble();
+
+		}
+	}
+

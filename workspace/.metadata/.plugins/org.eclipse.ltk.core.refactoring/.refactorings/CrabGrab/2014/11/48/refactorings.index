@@ -1,0 +1,13 @@
+1417091586910	Extract method 'UseSortExtern'
+1417094363677	Delete element
+1417096650088	Rename local variable 'thread'
+1417096728792	Extract method 'createRunnable'
+1417098207574	Rename type 'Dice'
+1417098211984	Rename type 'UseMoyenneHeure'
+1417103663643	Rename package 'ch.hearc.coursjava.moo.thread.triTableau'
+1417104364198	Rename local variable 'array'
+1417158889151	Delete element
+1417158908893	Rename package 'ch.hearc.coursjava.moo.thread.tritableau'
+1417158940727	Rename compilation unit 'UseTriTableau.java'
+1417158953136	Rename type 'TriTableau'
+1417336835291	Rename method 'getVecteur3'

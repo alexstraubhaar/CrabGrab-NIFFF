@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+<libraryInfo home="C:\Soft\java64\jdk" version="1.8.0_05">
+<bootpath>
+<entry path="C:\Soft\java64\jdk\jre\lib\resources.jar"/>
+<entry path="C:\Soft\java64\jdk\jre\lib\rt.jar"/>
+<entry path="C:\Soft\java64\jdk\jre\lib\sunrsasign.jar"/>
+<entry path="C:\Soft\java64\jdk\jre\lib\jsse.jar"/>
+<entry path="C:\Soft\java64\jdk\jre\lib\jce.jar"/>
+<entry path="C:\Soft\java64\jdk\jre\lib\charsets.jar"/>
+<entry path="C:\Soft\java64\jdk\jre\lib\jfr.jar"/>
+<entry path="C:\Soft\java64\jdk\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\Soft\java64\jdk\jre\lib\ext"/>
+<entry path="C:\Windows\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\Soft\java64\jdk\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+<libraryInfo home="C:\Soft\java64" version="1.8.0_05">
+<bootpath>
+<entry path="C:\Soft\java64\jre\lib\resources.jar"/>
+<entry path="C:\Soft\java64\jre\lib\rt.jar"/>
+<entry path="C:\Soft\java64\jre\lib\sunrsasign.jar"/>
+<entry path="C:\Soft\java64\jre\lib\jsse.jar"/>
+<entry path="C:\Soft\java64\jre\lib\jce.jar"/>
+<entry path="C:\Soft\java64\jre\lib\charsets.jar"/>
+<entry path="C:\Soft\java64\jre\lib\jfr.jar"/>
+<entry path="C:\Soft\java64\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\Soft\java64\jre\lib\ext"/>
+<entry path="C:\Windows\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\Soft\java64\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+<libraryInfo home="C:\Soft\Java" version="1.8.0_20">
+<bootpath>
+<entry path="C:\Soft\Java\jre\lib\resources.jar"/>
+<entry path="C:\Soft\Java\jre\lib\rt.jar"/>
+<entry path="C:\Soft\Java\jre\lib\sunrsasign.jar"/>
+<entry path="C:\Soft\Java\jre\lib\jsse.jar"/>
+<entry path="C:\Soft\Java\jre\lib\jce.jar"/>
+<entry path="C:\Soft\Java\jre\lib\charsets.jar"/>
+<entry path="C:\Soft\Java\jre\lib\jfr.jar"/>
+<entry path="C:\Soft\Java\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\Soft\Java\jre\lib\ext"/>
+<entry path="C:\Windows\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\Soft\Java\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+<libraryInfo home="C:\Soft\Java\jre" version="1.8.0_20">
+<bootpath>
+<entry path="C:\Soft\Java\jre\lib\resources.jar"/>
+<entry path="C:\Soft\Java\jre\lib\rt.jar"/>
+<entry path="C:\Soft\Java\jre\lib\sunrsasign.jar"/>
+<entry path="C:\Soft\Java\jre\lib\jsse.jar"/>
+<entry path="C:\Soft\Java\jre\lib\jce.jar"/>
+<entry path="C:\Soft\Java\jre\lib\charsets.jar"/>
+<entry path="C:\Soft\Java\jre\lib\jfr.jar"/>
+<entry path="C:\Soft\Java\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\Soft\Java\jre\lib\ext"/>
+<entry path="C:\WINDOWS\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\Soft\Java\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+<libraryInfo home="C:\Soft\java\jdk" version="1.8.0_20">
+<bootpath>
+<entry path="C:\Soft\java\jdk\jre\lib\resources.jar"/>
+<entry path="C:\Soft\java\jdk\jre\lib\rt.jar"/>
+<entry path="C:\Soft\java\jdk\jre\lib\sunrsasign.jar"/>
+<entry path="C:\Soft\java\jdk\jre\lib\jsse.jar"/>
+<entry path="C:\Soft\java\jdk\jre\lib\jce.jar"/>
+<entry path="C:\Soft\java\jdk\jre\lib\charsets.jar"/>
+<entry path="C:\Soft\java\jdk\jre\lib\jfr.jar"/>
+<entry path="C:\Soft\java\jdk\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\Soft\java\jdk\jre\lib\ext"/>
+<entry path="C:\WINDOWS\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\Soft\java\jdk\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>

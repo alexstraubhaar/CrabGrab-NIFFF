@@ -1,0 +1,102 @@
+
+package ch.hearc.coursjava.gui.layout.sans.animation;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class JFrameBoutonTournant extends JFrame
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JFrameBoutonTournant()
+		{
+		geometry();
+		control();
+		apparence();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void geometry()
+		{
+			boutonStart = new JButton("Start");
+			boutonStop = new JButton("Stop");
+			boutonTournant = new JButton("Tournant");
+
+			boutonStart.setSize(100, 40);
+			boutonStop.setSize(100, 40);
+			boutonTournant.setSize(100, 40);
+
+			boutonStart.setLocation(10, 10);
+			boutonStop.setLocation(10, 300);
+			
+
+			setLayout(null); //bien quand taille d'écran fixe, sans traduction
+
+			add(boutonStart);
+			add(boutonStop);
+			add(boutonTournant);
+		}
+
+	private void control()
+		{
+		boutonStart.addActionListener(new ActionListener()
+			{
+
+				@Override
+				public void actionPerformed(ActionEvent e)
+					{
+					System.out.println("Click from start");
+					}
+			});
+		boutonStop.addActionListener(new ActionListener()
+			{
+
+				@Override
+				public void actionPerformed(ActionEvent e)
+					{
+					System.out.println("Click from stop");
+
+					}
+			});
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		}
+
+	private void apparence()
+		{
+		setSize(800, 800);
+		setResizable(false);
+
+		setVisible(true);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	//Tools
+	private JButton boutonTournant;
+	private JButton boutonStart;
+	private JButton boutonStop;
+
+	}

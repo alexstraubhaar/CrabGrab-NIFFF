@@ -1,0 +1,41 @@
+
+package ch.hearc.coursjava.moo.enumeration.quadratic;
+
+import java.util.Map;
+
+import ch.hearc.coursjava.moo.quadratic.Quadratic;
+
+
+
+public class UseParseurQuadratic
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		// Create the quadratic parser.
+		ParseurQuadratic parseurQuadratic = new ParseurQuadratic(args);
+		parseurQuadratic.run();
+		Map<ABC, Double> mapABC = parseurQuadratic.getMapABC();
+
+		// Get the arguments for the Quadratic class.
+		Double a = mapABC.get(ABC.a);
+		Double b = mapABC.get(ABC.b);
+		Double c = mapABC.get(ABC.c);
+
+		// Build the Quadratic class and solve the equation.
+		Quadratic quadratic = new Quadratic(a, b, c);
+		quadratic.run();
+		System.out.println(quadratic);
+
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}
+

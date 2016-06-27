@@ -1,0 +1,81 @@
+
+package ch.hearc.coursjava.gui.j2d.conference;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+
+import ch.hearc.coursjava.gui.layout.sans.animation.aveccomposition.jframe.jpanel.control.JPanelControl;
+import ch.hearc.coursjava.gui.tools.Animator;
+
+public class JFrameConference extends JFrame
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JFrameConference()
+		{
+		geometry();
+		control();
+		appearance();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void geometry()
+		{
+		// JComponent : Instanciation
+		jPanelConference = new JPanelConference();
+		jPanelControl = new JPanelControl(jPanelConference);
+
+			// Layout : Specification
+			{
+			BorderLayout borderLayout = new BorderLayout();
+			setLayout(borderLayout);
+
+			// borderLayout.setHgap(20);
+			// borderLayout.setVgap(20);
+			}
+
+		// JComponent : add
+		add(jPanelConference, BorderLayout.CENTER);
+		add(jPanelControl, BorderLayout.NORTH);
+		}
+
+	private void control()
+		{
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		}
+
+	private void appearance()
+		{
+		setSize(600, 400);
+		setLocationRelativeTo(null); // frame centrer
+		setVisible(true); // last!
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Tools
+	private JPanelConference jPanelConference;
+	private JPanelControl jPanelControl;
+
+	}

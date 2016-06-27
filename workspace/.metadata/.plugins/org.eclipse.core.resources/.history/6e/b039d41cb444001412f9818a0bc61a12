@@ -1,0 +1,29 @@
+
+package ch.hearc.coursjava.kitbase.collection;
+
+import java.util.HashMap;
+
+
+
+public class UseMap
+	{
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		Map<String, Double> map = new HashMap<String, Double>();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}
+

@@ -1,0 +1,77 @@
+
+package ch.hearc.coursjava.moo.enumeration.quadratic;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+
+public class UseQuadraticEnum
+	{
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		Map<ABC, Double> mapABC = parser();
+
+		double a = mapABC.get(A);
+		double b = mapABC.get(B);
+		double c = mapABC.get(C);
+
+		Quadratic quadratic = new Quadratic(a, b, c);
+		quadratic.run();
+		System.out.println(quadratic);
+		}
+
+	private static Map<ABC, Double> parser()
+		{
+		String a = System.getProperty(ABC.a.name());
+		String b = System.getProperty(ABC.b.name());
+		String c = System.getProperty(ABC.c.name());
+
+		double aD = toDouble(a);
+		double bD = toDouble(b);
+		double cD = toDouble(c);
+
+		HashMap<ABC, Double> mapABC = new HashMap<String, Double>(3);
+		mapABC.put(A, aD);
+		mapABC.put(B, bD);
+		mapABC.put(C, cD);
+		return mapABC;
+		}
+
+	private static double toDouble(String str)
+		{
+		try
+			{
+			return Double.valueOf(str);
+			}
+		catch (NumberFormatException e)
+			{
+			System.err.println("Could not convert " + str + " to double");
+			System.exit(0); // 0 normal, -1 anormal
+			return -1;
+			}
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	 |*			  Static			*|
+	 \*------------------------------*/
+
+	private static final String A = "a";
+	private static final String B = "b";
+	private static final String C = "c";
+	}
+

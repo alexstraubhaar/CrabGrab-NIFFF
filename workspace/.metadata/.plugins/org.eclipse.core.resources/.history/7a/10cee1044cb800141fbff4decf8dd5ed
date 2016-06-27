@@ -1,0 +1,47 @@
+
+package ch.hearc.coursjava.moo.heritage.dessin;
+
+
+
+public class UseDessin
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		Dessin d1 = new Dessin("Draw");
+
+		populer(d1);
+
+		System.out.println(d1.toString());
+
+		System.out.println("Surface totale : " + d1.surface());
+		System.out.println("Perim total : " + d1.perimetre());
+
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void populer(Dessin d1)
+		{
+		Formes carre = new Carre("carre1", 5);
+		Formes rectangle = new Rectangle("rect1", 5, 2);
+		Formes cercle = new Cercle("cercle1", 3);
+
+		d1.add(carre);
+		d1.add(rectangle);
+		d1.add(cercle);
+		}
+
+	}
+

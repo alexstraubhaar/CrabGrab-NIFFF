@@ -1,0 +1,5 @@
+1426768370655	Rename method 'removeContent'
+1426768436285	Rename method 'setContent'
+1426768449459	Rename method 'clearContent'
+1426774444365	Delete element
+1426776425338	Extract method 'drawConference'

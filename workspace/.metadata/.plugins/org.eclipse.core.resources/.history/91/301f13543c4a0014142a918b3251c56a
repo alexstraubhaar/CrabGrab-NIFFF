@@ -1,0 +1,60 @@
+
+package ch.hearc.coursjava.kitbase.lineaire;
+
+import org.junit.Assert;
+
+import com.bilat.tools.io.console.Clavier;
+
+public class Lineaire
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static double[] saisir()
+		{
+		double a;
+		do
+			{
+			a = Clavier.lireDouble("A = ");
+			} while(a == 0);
+
+		double b = Clavier.lireDouble("B = ");
+
+		double[] tabCoefficient = new double[2];
+		tabCoefficient[0] = a;
+		tabCoefficient[1] = b;
+		Assert.assertTrue(tabCoefficient[0]!=0);
+
+		return tabCoefficient;
+		}
+
+/**
+ * hypothèse tabCoefficient[0]!=0
+ * @param tabCoefficient
+ * @return
+ */
+	public static double solve(double[] tabCoefficient)
+		{
+		Assert.assertTrue(tabCoefficient[0]!=0);
+		return -tabCoefficient[1] / tabCoefficient[0];
+		}
+
+	public static void print(double[] tabCoefficient, double x)
+		{
+		StringBuilder stB = new StringBuilder();
+			stB.append(tabCoefficient[0]);
+			stB.append("x +");
+			stB.append(tabCoefficient[1]);
+			stB.append(": x =");
+			stB.append(x);
+		String message= stB.toString();
+		System.out.println(message);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}

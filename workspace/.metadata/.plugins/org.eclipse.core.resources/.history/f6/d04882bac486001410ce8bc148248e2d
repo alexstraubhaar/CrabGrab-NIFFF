@@ -1,0 +1,29 @@
+
+package ch.hearc.coursjava.moo.enumeration.quadratic;
+
+import java.util.Map;
+
+
+
+public class UseParseurQuadratic
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		// Create the quadratic parser.
+		ParseurQuadratic parseurQuadratic = new ParseurQuadratic(args);
+		parseurQuadratic.run();
+		Map<ABC, Double> mapABC = parseurQuadratic.getMapABC();
+		
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}
+

@@ -1,0 +1,83 @@
+
+package ch.hearc.coursjava.moo.lineaire;
+
+public class Lineaire implements Runnable
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public Lineaire(double a, double b)
+		{
+		this.a = a;
+		this.b = b;
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	@Override
+	public void run()
+		{
+		this.x = -b / a;
+		}
+
+	//	@Override
+	//	public String toString()
+	//		{
+	//		return this.x + "";
+	//		}
+
+	@Override
+	public String toString()
+		{
+		StringBuilder builder = new StringBuilder();
+		builder.append(DEBUT);
+		builder.append(this.a);
+		builder.append(B);
+		builder.append(this.b);
+		builder.append();
+		builder.append(this.x);
+		builder.append("]");
+
+		return builder.toString();
+		}
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	public double getX()
+		{
+		return this.x;
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	//Inputs
+	private double a;
+	private double b;
+
+	//Outputs
+	private double x;
+
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
+	private static final String DEBUT = "Lineaire [a=";
+	private static final String B = ", b=";
+	private static final String X = ", x=";
+	}

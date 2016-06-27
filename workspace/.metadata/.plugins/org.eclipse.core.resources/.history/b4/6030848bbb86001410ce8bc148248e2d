@@ -1,0 +1,40 @@
+
+package ch.hearc.coursjava.moo.enumeration.quadratic;
+
+import java.util.Map;
+
+/*
+ *
+ */
+
+public class UseQuadratic
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+	
+	public static void main(String[] args)
+		{
+		main();
+		}
+	
+	public static void main()
+		{
+		Map<String, Double> mapABC = parser();
+		}
+
+	private static Map<String, Double> parser()
+		{
+		System.getProperty("a");
+		return null;
+		}
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	
+	
+	}
+

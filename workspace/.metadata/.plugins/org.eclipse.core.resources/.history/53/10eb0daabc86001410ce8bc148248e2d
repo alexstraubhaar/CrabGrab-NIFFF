@@ -1,0 +1,63 @@
+
+package ch.hearc.coursjava.moo.enumeration.quadratic;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/*
+ *
+ */
+
+public class UseQuadratic
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		Map<String, Double> mapABC = parser();
+		}
+
+	private static Map<String, Double> parser()
+		{
+		String a = System.getProperty("a");
+		String b = System.getProperty("b");
+		String c = System.getProperty("c");
+
+		double aD = toDouble(a);
+		double bD = toDouble(b);
+		double cD = toDouble(c);
+
+		HashMap<String, Double> mapABC = new HashMap<String, Double>(3);
+		mapABC.put("a", aD);
+		mapABC.put("b", bD);
+		mapABC.put("c", cD);
+		return mapABC;
+		}
+
+	private static double toDouble(String str)
+		{
+		try
+			{
+			return Double.valueOf(str);
+			}
+		catch (NumberFormatException e)
+			{
+			System.err.println("Could not convert " + str + " to double");
+			System.exit(0); // 0 normal, -1 anormal
+			return -1;
+			}
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}

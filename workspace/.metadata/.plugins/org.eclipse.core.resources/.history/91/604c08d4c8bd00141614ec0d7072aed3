@@ -1,0 +1,35 @@
+
+package ch.hearc.coursjava.gui.doubleFrame;
+
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+public class JLabelCount extends JLabel
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+	public JLabelCount()
+		{
+		this.counter = 0;
+		this.setText(counter + "");
+		this.setHorizontalAlignment(SwingConstants.CENTER); //cosmétique
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public void increment()
+		{
+		this.setText(++counter + "");
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	//Tools
+	private int counter;
+	}

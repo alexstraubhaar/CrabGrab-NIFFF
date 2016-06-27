@@ -1,0 +1,77 @@
+
+package ch.hearc.coursjava.gui.layout.sans.animation.aveccomposition;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JPanel;
+
+import ch.hearc.coursjava.gui.layout.sans.animation.aveccomposition.jframe.jpanel.button.JPanelButton;
+import ch.hearc.coursjava.gui.layout.sans.animation.aveccomposition.jframe.jpanel.control.JPanelControl;
+
+public class JPanelAnimation extends JPanel
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JPanelAnimation()
+		{
+		geometry();
+		control();
+		appearance();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void geometry()
+		{
+		// JComponent : Instanciation
+		panelButton = new JPanelButton();
+		panelControl = new JPanelControl(panelButton);
+
+			// Layout : Specification
+			{
+			BorderLayout borderLayout = new BorderLayout();
+			setLayout(borderLayout);
+
+			}
+
+		// JComponent : add
+		add(panelControl, BorderLayout.NORTH);
+		add(panelButton, BorderLayout.CENTER);
+		}
+
+	private void control()
+		{
+		// rien
+		}
+
+	private void appearance()
+		{
+		// rien
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Tools
+	private JPanelControl panelControl;
+	private JPanelButton panelButton;
+
+	}

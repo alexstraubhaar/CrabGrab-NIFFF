@@ -1,0 +1,26 @@
+
+package ch.hearc.coursjava.kitbase.Quadratic;
+
+public class UseQuadratic
+	{
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+	
+	public static void main(String[] args)
+		{
+		main();
+		}
+	
+	public static void main()
+		{
+		double[] tabCoefficient = Quadratic.saisir();
+		Quadratic.print(tabCoefficient); //print has to only show, not calculate
+		}
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+	
+	}

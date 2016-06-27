@@ -1,0 +1,126 @@
+
+package ch.hearc.coursjava.moo.classInterneAnonyme;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class UseMaison
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		UseSortExtern();
+		UseSortIntern();
+		UseSortInternReUsable();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static Maison[] creationTableauMaison()
+		{
+		Maison[] tabMaison = new Maison[4];
+		tabMaison[0] = new Maison(200000, 200);
+		tabMaison[1] = new Maison(100000, 200);
+		tabMaison[2] = new Maison(200000, 400);
+		tabMaison[3] = new Maison(600000, 200);
+
+		return tabMaison;
+		}
+
+	private static Maison[] creationTableauMaison2()
+		{
+		Maison[] tabMaison = new Maison[5];
+		tabMaison[0] = new Maison(900000, 200);
+		tabMaison[1] = new Maison(300000, 400);
+		tabMaison[2] = new Maison(10000, 300);
+		tabMaison[3] = new Maison(6000, 300);
+		tabMaison[3] = new Maison(6000, 400);
+
+		return tabMaison;
+		}
+
+	private static void UseSortExtern()
+		{
+		Maison[] tabMaison = creationTableauMaison();
+		ComparatorMaison comparatorMaison = new ComparatorMaison();
+		Arrays.sort(tabMaison, comparatorMaison);
+
+		System.out.println(Arrays.asList(tabMaison));
+		}
+
+	private static void UseSortIntern()
+		{
+		Maison[] tabMaison = creationTableauMaison();
+		Arrays.sort(tabMaison, new Comparator<Maison>()
+			{
+
+				@Override
+				public int compare(Maison m1, Maison m2)
+					{
+					if (m1.getPrix() == m2.getPrix())
+						{
+						return ((Integer)m1.getSurface()).compareTo(m2.getSurface());
+						}
+					else
+						{
+						return ((Integer)m1.getPrix()).compareTo(m2.getPrix());
+						}
+					}
+			});
+
+		System.out.println(Arrays.asList(tabMaison));
+		Arrays.sort(tabMaison, new Comparator<Maison>()
+			{
+
+				@Override
+				public int compare(Maison m1, Maison m2)
+					{
+					if (m1.getSurface() == m2.getSurface())
+						{
+						return ((Integer)m1.getPrix()).compareTo(m2.getPrix()) * -1;
+						}
+					else
+						{
+						return ((Integer)m1.getSurface()).compareTo(m2.getSurface()) * -1;
+						}
+					}
+			});
+		System.out.println(Arrays.asList(tabMaison));
+		}
+
+	private static void UseSortInternReUsable()
+		{
+		Maison[] tabMaison = creationTableauMaison();
+		Maison[] tabMaison2 = creationTableauMaison2();
+
+		Comparator<Maison> comparator = new Comparator<Maison>()
+			{
+
+				@Override
+				public int compare(Maison m1, Maison m2)
+					{
+					if (m1.getSurface() == m2.getSurface())
+						{
+						return ((Integer)m1.getPrix()).compareTo(m2.getPrix()) * -1;
+						}
+					else
+						{
+						return ((Integer)m1.getSurface()).compareTo(m2.getSurface()) * -1;
+						}
+					}
+			}
+		}
+
+
+	}

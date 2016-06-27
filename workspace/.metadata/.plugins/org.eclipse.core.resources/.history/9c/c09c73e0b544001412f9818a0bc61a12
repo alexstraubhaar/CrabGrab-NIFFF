@@ -1,0 +1,105 @@
+
+package ch.hearc.coursjava.kitbase.collection;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
+
+public class UseMap
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		//		Map<String, Double> map = new HashMap<String, Double>();
+		Map<String, Double> map = new TreeMap<String, Double>();
+		peupler(map);
+		afficher(map);
+		}
+
+	private static void afficher(Map<String, Double> map)
+		{
+			//v1
+			{
+			Set<Entry<String, Double>> set = map.entrySet();
+			Iterator<Entry<String, Double>> it = set.iterator();
+			while(it.hasNext())
+				{
+				Entry<String, Double> ligne = it.next();
+				//v1.1
+				String key = ligne.getKey();
+				Double value = ligne.getValue();
+				System.out.println(key + ". " + value);
+				//v1.2
+				System.out.println(ligne);
+				}
+			}
+			System.out.println("\n");
+
+			//v2
+			{
+			Set<Entry<String, Double>> set = map.entrySet();
+			for(Entry<String, Double> ligne:set)
+				{
+				//v2.1
+				String key = ligne.getKey();
+				Double value = ligne.getValue();
+				System.out.println(key + ". " + value);
+				//v2.2
+				System.out.println(ligne);
+				}
+			}
+			System.out.println("\n");
+
+			//v3
+			System.out.println(map);
+
+			afficherCle(map);
+			afficherValeur(map);
+		}
+
+	private static void afficherValeur(Map<String, Double> map)
+		{
+		
+		Set<String> keySet = map.keySet();
+		for(String key:keySet){
+		System.out.println(key);
+		}
+		
+		}
+
+	private static void afficherCle(Map<String, Double> map)
+		{
+		// TODO Auto-generated method stub
+		
+		}
+
+	private static void peupler(Map<String, Double> map)
+		{
+		map.put("Wirt", 1.0);
+		map.put("Mut", 2.0);
+		map.put("Rey", 3.0);
+		map.put("DiStasio", 4.0);
+		map.put("Freitas", 5.0);
+		map.put("Künzi", 6.0);
+		map.put("Visinand", 7.0);
+		map.put("Straubhaar", 15.0);
+		map.put("Bitter", 14.3);
+		map.put("Luy", 12.3);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}

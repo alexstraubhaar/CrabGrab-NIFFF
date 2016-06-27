@@ -1,0 +1,31 @@
+
+package ch.hearc.coursjava.moo.enumeration.quadratic;
+
+
+
+public class UseQuadraticEnumB
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		parse(args)
+		main();
+		}
+
+	public static void main()
+		{
+		// Args passed as program arguments
+
+
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}
+

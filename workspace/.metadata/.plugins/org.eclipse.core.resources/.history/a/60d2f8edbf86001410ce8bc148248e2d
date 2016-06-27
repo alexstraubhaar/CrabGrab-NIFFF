@@ -1,0 +1,55 @@
+
+package ch.hearc.coursjava.moo.enumeration.quadratic;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.Assert;
+
+
+
+public class UseQuadraticEnumB
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		parse(args);
+
+		}
+
+
+
+
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+	private static Map<ABC,Double> parser(String[] tabABC)
+		{
+		Assert.assertTrue(tabABC.length == 3);
+		HashMap<ABC, Double> mapABC = new HashMap<ABC,Double>(3);
+		for(String bloc:tabABC)
+			{
+			parserBloc(bloc, mapABC);
+			}
+
+		}
+
+
+
+
+
+	private static void parserBloc(String bloc, HashMap<ABC, Double> mapABC)
+		{
+		
+		String[] tab = bloc.split("=");
+		String key = tab[0];
+		
+		mapABC.put(key, value);
+		}
+	}
+

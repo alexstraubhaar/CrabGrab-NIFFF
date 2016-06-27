@@ -1,0 +1,7 @@
+1415274887726	Copy package
+1415274913909	Delete element
+1415274915699	Delete element
+1415277116815	Extract method 'discriminant'
+1415277622371	Rename method 'getX'
+1415281145996	Rename type 'UsePile'
+1415281808207	Extract method 'createVoiture'

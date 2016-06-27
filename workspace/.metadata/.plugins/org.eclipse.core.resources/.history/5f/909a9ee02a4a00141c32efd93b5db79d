@@ -1,0 +1,66 @@
+
+package ch.hearc.coursjava.kitbase.collection;
+
+import java.util.Iterator;
+import java.util.List;
+
+public class UseBiListe
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	/**
+	 * Hypothèse: listes de même tailles
+	 * @param listeX
+	 * @param listeY
+	 */
+	private static void print(List<Integer> listeX, List<Integer> listeY)
+		{
+			//v1
+			{
+			Iterator<Integer> itx = listeX.iterator();
+			Iterator<Integer> ity = listeY.iterator();
+			while(itx.hasNext())
+				{
+				Integer x = itx.next();
+				Integer y = ity.next();
+				System.out.println(x + " " + y);
+				}
+			}
+
+			//v2
+			{
+			Iterator<Integer> ity = listeY.iterator();
+			for(Integer x:listeX)
+				{
+				Integer y = ity.next();
+				System.out.println(x + " " + y);
+				}
+			}
+
+			//v3
+			{
+			Iterator<Integer> itx = listeX.iterator();
+			for(Integer y:listeY)
+				{
+				System.out.println(itx.next() + " " + y);
+				}
+			}
+		}
+	}

@@ -1,0 +1,137 @@
+
+package ch.hearc.coursjava.TE;
+
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.geom.Line2D;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+public class JPanelPolygon extends JPanel
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JPanelPolygon(int n, int rayon)
+		{
+		beta=1;
+		this.n = n;
+		this.cote = rayon;
+		alpha = 2 * Math.PI / n;
+		geometry();
+		control();
+		appearance();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+	@Override
+	protected void paintComponent(Graphics g)
+		{
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D)g;
+		dessiner(g2d);
+		}
+	public void start()
+	{
+
+	Thread thread= new Thread(new Runnable()
+		{
+
+			@Override
+			public void run()
+				{
+				System.out.println("affichage");
+				beta+=1;
+				repaint();
+				}
+		});
+	thread.start();
+
+	}
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void dessiner(Graphics2D g2d)
+		{
+		centrer(g2d);
+		g2d.setColor(Color.RED);
+		g2d.rotate(beta);
+		for(int i = 0; i < n; i++)
+			{
+			g2d.draw(ligne2d);
+			g2d.translate(cote,0);
+			g2d.rotate(alpha);
+			//centrer(g2d);
+			}
+
+		}
+
+	private void centrer(Graphics2D g2d)
+		{
+		int w = this.getWidth();
+		int h = this.getHeight();
+		g2d.translate(w / 2, h / 2);
+
+		}
+
+	private void geometry()
+		{
+		// JComponent : Instanciation
+		this.ligne2d = new Line2D.Double(0, 0, cote, 0);
+		boutonStart= new JButton("Start");
+			// Layout : Specification
+			{
+			FlowLayout flowlayout = new FlowLayout(FlowLayout.CENTER);
+			setLayout(flowlayout);
+
+			// flowlayout.setHgap(20);
+			// flowlayout.setVgap(20);
+			}
+
+		// JComponent : add
+			add(boutonStart);
+		}
+
+	private void control()
+		{
+		// rien
+		boutonStart.addActionListener(new ActionListener()
+			{
+
+				@Override
+				public void actionPerformed(ActionEvent e)
+					{
+					start();
+
+					}
+			})
+		}
+
+	private void appearance()
+		{
+		// rien
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+	private int n;
+	private int cote;
+	private Line2D ligne2d;
+
+	// Tools
+	private double alpha;
+	private double beta;
+	private JButton boutonStart;
+
+	}

@@ -1,0 +1,174 @@
+
+package ch.hearc.coursjava.moo.enumeration.quadratic;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.Assert;
+
+public class ParseurQuadratic implements Runnable
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public ParseurQuadratic(String[] tabABC)
+		{
+		Assert.assertTrue(tabABC.length == 3);
+		this.tabABC = tabABC;
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	@Override
+	public void run()
+		{
+		this.mapABC = new HashMap<ABC, Double>(3);
+
+		//versionSequential();
+		versionParallele();
+		}
+
+	private void versionParallele()
+		{
+
+		// 3 threads 1 thread by block
+		// internal classes
+		// only one instance of Runnable if you can
+
+		Runnable runnable1 = new Runnable()
+			{
+
+				@Override
+				public void run()
+					{
+					parserBloc(tabABC[0]);
+					}
+			};
+
+		Runnable runnable2 = new Runnable()
+			{
+
+				@Override
+				public void run()
+					{
+					parserBloc(tabABC[1]);
+					}
+			};
+
+		Runnable runnable3 = new Runnable()
+			{
+
+				@Override
+				public void run()
+					{
+					parserBloc(tabABC[2]);
+					}
+			};
+
+		Thread t1 = new Thread(runnable1);
+		Thread t2 = new Thread(runnable2);
+		Thread t3 = new Thread(runnable3);
+
+		t1.start();
+		t2.start();
+		t3.start();
+
+		try
+			{
+			t1.join();
+			t2.join();
+			t3.join();
+			}
+		catch (Exception e)
+			{
+			
+			}
+
+		}
+
+	private void versionSequential()
+		{
+		for(String bloc:tabABC)
+			{
+			parserBloc(bloc);
+			}
+		}
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	public Map<ABC, Double> getMapABC()
+		{
+		return this.mapABC;
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void parserBloc(String bloc)
+		{
+		String[] tab = bloc.split("=");
+		String key = tab[0];
+		ABC abc = toABC(key);
+
+		String value = tab[1];
+		double valeur = toDouble(value);
+		mapABC.put(abc, valeur);
+		}
+
+	/*------------------------------*\
+	 |*			  Static			*|
+	 \*------------------------------*/
+
+	private static double toDouble(String value)
+		{
+		try
+			{
+			return Double.valueOf(value);
+			}
+		catch (NumberFormatException e)
+			{
+			System.err.println("Could not convert " + value + " to double");
+			System.exit(0); // 0 normal, -1 anormal
+			return -1;
+			}
+		}
+
+	private static ABC toABC(String key)
+		{
+		try
+			{
+			return ABC.valueOf(key);
+			}
+		catch (Exception e)
+			{
+			System.err.println("Could not find argument specified with " + key);
+			System.err.println("Correct values: " + Arrays.toString(ABC.values()));
+
+			System.exit(-1); // 0 normal, -1 anormal
+			return null;
+			}
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Inputs
+	private String[] tabABC;
+
+	// Outputs
+	private Map<ABC, Double> mapABC;
+
+	}

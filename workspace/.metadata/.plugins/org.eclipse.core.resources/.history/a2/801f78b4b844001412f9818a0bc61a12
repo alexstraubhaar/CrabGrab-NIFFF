@@ -1,0 +1,65 @@
+
+package ch.hearc.coursjava.kitbase.collection;
+
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class UseTemp
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		ArrayList<Set<String>> list = new ArrayList<Set<String>>();
+		peupler(list);
+		afficher(list);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void afficher(ArrayList<Set<String>> list)
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	private static void peupler(ArrayList<Set<String>> list)
+		{
+		for(int i = 1; i <= 3; i++)
+			{
+			Set<String> set = new TreeSet<String>();
+			peupler(set, i);
+			list.add(set);
+			}
+		}
+
+	private static void peupler(Set<String> set, int n)
+		{
+		for(int i = 1; i <= 3; i++)
+			{
+			String value = "a" + i + zero(n);
+			set.add(value);
+			}
+		}
+
+	private static String zero(int n)
+		{
+		String s = new String();
+		for(int i = 1; i <= n; i++)
+			{
+			s += "0";
+			}
+		return s;
+		}
+	}

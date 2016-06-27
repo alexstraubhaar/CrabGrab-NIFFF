@@ -1,0 +1,30 @@
+
+package ch.hearc.coursjava.kitbase.collection;
+
+import java.util.Set;
+
+
+
+public class UseTemp
+	{
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		Set<String> set = new TreeSet<String>();
+		list = List<Set<String>>();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}
+

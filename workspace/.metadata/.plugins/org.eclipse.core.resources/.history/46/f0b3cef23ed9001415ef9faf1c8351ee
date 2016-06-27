@@ -1,0 +1,69 @@
+
+package ch.hearc.coursjava.io.file.object;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class SerializerTools
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static byte[] serialize(Serializable serializable) throws IOException
+		{
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		BufferedOutputStream bos = new BufferedOutputStream(baos);
+		ObjectOutputStream oos = new ObjectOutputStream(bos);
+
+		oos.writeObject(serializable);
+
+		oos.close();
+		bos.close();
+		baos.close();
+
+		return baos.toByteArray(); // Récupération du tableau de byte après fermeture des flux pour être sûr que le "flush" est terminé et que le tableau de byte est disponible
+		}
+
+	public static Serializable deserialize(byte[] tabBytes) throws IOException, ClassNotFoundException
+		{
+		ByteArrayInputStream bais = new ByteArrayInputStream(tabBytes);
+		BufferedInputStream bis = new BufferedInputStream(bais);
+		ObjectInputStream ois = new ObjectInputStream(bis);
+
+		Serializable serializable = (Serializable)ois.readObject();
+
+		ois.close();
+		bis.close();
+		bais.close();
+
+		return serializable;
+		}
+
+	/**
+	 * Moins rapide qu'une méthode dédiée
+	 * Supporte une hiérarchie d'objets Serializable avec références croisées
+	 * Si l'arbre est trop profond, un StackOverflow peut arriver
+	 *
+	 * @param serializable
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	public static Serializable clone(Serializable serializable) throws ClassNotFoundException, IOException
+		{
+		byte[] tabBytes = serialize(serializable);
+		return deserialize(tabBytes);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+	}

@@ -1,0 +1,52 @@
+
+package ch.hearc.coursjava.kitbase.collection;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+public class UseSet
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		final int N = 5;
+		Set<Double> set = new HashSet<Double>();
+		peupler(set, N);
+		afficher(set);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void afficher(Set<Double> set)
+		{
+		//v1
+		Iterator<Double> it = set.iterator();
+		while(it.hasNext())
+			{
+			double element = it.next();
+			System.out.println(element);
+			}
+		System.out.println("\n");
+
+		}
+
+	private static void peupler(Set<Double> set, int n)
+		{
+		for(int i = 1; i <= n; i++)
+			{
+			set.add(i * Math.PI);
+			}
+		}
+	}

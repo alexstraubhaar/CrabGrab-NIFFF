@@ -1,0 +1,37 @@
+
+package ch.hearc.coursjava.kitbase.lineaire;
+
+import com.bilat.tools.io.console.Clavier;
+
+
+
+public class Lineaire
+	{
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static double[] saisir()
+	{
+	do{
+		double a = Clavier.lireDouble("A = ");
+	}while(a==0);
+
+	double b = Clavier.lireDouble("B = ");
+
+	double[] tabCoefficient = new double[2];
+	tabCoefficient[0]=a;
+	tabCoefficient[1]=b;
+
+	return tabCoefficient;
+	}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+
+
+
+	}
+

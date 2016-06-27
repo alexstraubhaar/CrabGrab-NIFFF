@@ -1,0 +1,18 @@
+1426156480766	Move compilation unit
+1426156485034	Move compilation unit
+1426156535312	Copy compilation unit
+1426156674848	Rename type 'JPanelCentral'
+1426156865330	Rename type 'JFrameBoutonTournant'
+1426158813565	Move compilation unit
+1426158827427	Move compilation unit
+1426158834068	Move compilation unit
+1426158849109	Move compilation unit
+1426158911468	Move compilation unit
+1426162989860	Move compilation unit
+1426164738107	Extract method 'experimentationFlowLayout'
+1426164963916	Rename method 'experimentationBorderLayout'
+1426167195219	Delete element
+1426168603701	Move compilation unit
+1426170764794	Rename type 'JTabbedPaneHello'
+1426171571032	Delete element
+1426171768407	Rename type 'JFrameFullscreen'

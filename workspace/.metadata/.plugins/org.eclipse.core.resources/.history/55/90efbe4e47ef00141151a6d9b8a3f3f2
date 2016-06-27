@@ -1,0 +1,75 @@
+
+package ch.hearc.coursjava.TE;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+
+public class JFramePolygon extends JFrame
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JFramePolygon()
+		{
+		geometry();
+		control();
+		appearance();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void geometry()
+		{
+			// JComponent : Instanciation
+			jpanelpolygon= new JPanelPolygon(1, 10);
+			// Layout : Specification
+			{
+			BorderLayout borderLayout = new BorderLayout();
+			setLayout(borderLayout);
+
+			// borderLayout.setHgap(20);
+			// borderLayout.setVgap(20);
+			}
+
+		// JComponent : add
+		//add(TODO,BorderLayout.CENTER);
+			add(jpanelpolygon);
+		}
+
+	private void control()
+		{
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		}
+
+	private void appearance()
+		{
+		setSize(600, 400);
+		setLocationRelativeTo(null); // frame centrer
+		setVisible(true); // last!
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Tools
+
+	private JPanelPolygon jpanelpolygon;
+	}

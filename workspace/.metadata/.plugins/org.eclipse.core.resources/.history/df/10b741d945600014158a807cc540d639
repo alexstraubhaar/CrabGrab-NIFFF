@@ -1,0 +1,29 @@
+1: Ecrire des tests unitaires pour valider la classe quadratique
+2: Vous allez m'écrire l'équivalent de la boucle for(int i=1; i<=n;i++) sans utiliser de type simple
+3: Exercices supplémentaires: Ajouter les assertions nécessaires dans la classe quadratique
+4: Implémenter UseQuadratique ARGS
+-------------------------------------------
+	09.10.2014 Todo
+-------------------------------------------
+1: Deployment: Get a Linux & Windows VM 
+
+-------------------------------------------
+	30.10.2014 Todo
+-------------------------------------------
+Usetab2dTriangulaire(afficher, peupler, creer(n))
+useTab2dHeterogene()
+	creer(int[] tabNbColonnesParLigne)
+tabtools2d
+	isEgal(tab, epsilon)
+	
+-------------------------------------------
+	06.11.2014 Todo
+-------------------------------------------
+
+Implémenter la classe quadratique sous forme objet
+Indication :
+- Discrimant est un attribut de type tools
+- Utiliser une méthode discriminant privée qui calcule le discriminant
+
+Redéfinir la méthode toString() pour afficher a, b, c, x.
+Faire les méthodes cloneOf pour la classe quadratique

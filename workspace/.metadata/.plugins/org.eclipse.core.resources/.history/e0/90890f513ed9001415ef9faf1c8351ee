@@ -1,0 +1,56 @@
+
+package ch.hearc.coursjava.io.file.object;
+
+import java.io.IOException;
+
+
+
+public class UseSerialization
+	{
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		try
+			{
+			main();
+			}
+		catch (Exception e)
+			{
+			System.err.println("Exception err");
+			e.printStackTrace();
+			}
+		}
+
+	public static void main() throws ClassNotFoundException, IOException
+		{
+		useSerializationDeserialization();
+		useClone();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+
+
+	private static void useClone() throws ClassNotFoundException, IOException
+		{
+		Equipe equipe = Tools.create("Equipe 1", 1000);
+		Equipe equipeClone = (Equipe)SerializerTools.clone(equipe);
+		}
+
+	private static void useSerializationDeserialization() throws IOException, ClassNotFoundException
+		{
+		Equipe equipe = Tools.create("Equipe 1", 5);
+		byte[] tabBytes = SerializerTools.serialize(equipe);
+		Equipe equipeClone = (Equipe)SerializerTools.deserialize(tabBytes);
+
+		System.out.println(equipe);
+		System.out.println(equipeClone);
+		}
+
+	}
+

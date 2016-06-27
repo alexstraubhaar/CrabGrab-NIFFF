@@ -1,0 +1,33 @@
+
+package ch.hearc.coursjava.kitbase.collection;
+
+import java.util.HashSet;
+import java.util.Set;
+
+
+
+public class UseSet
+	{
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		final int N = 5;
+		Set<Double> set = new HashSet<Double>();
+		peupler(set, N);
+		afficher(set);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	}
+

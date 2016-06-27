@@ -1,0 +1,188 @@
+
+package ch.hearc.coursjava.gui.j2d.conference;
+
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+
+import javax.swing.JPanel;
+
+import ch.hearc.coursjava.gui.layout.sans.animation.aveccomposition.jframe.jpanel.button.Control_I;
+import ch.hearc.coursjava.gui.tools.Animable_I;
+import ch.hearc.coursjava.gui.tools.Animator;
+
+public class JPanelConference extends JPanel implements Control_I ,Animable_I
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public JPanelConference(int rayon, int n, int w, int h)
+		{
+		// Inputs
+		this.rayon = rayon;
+		this.n = n;
+		this.w = w;
+		this.h = h;
+
+		// Tools
+		rectangle2d = new Rectangle2D.Double(-w / 2, -h / 2, w, h);
+		dAlpha = Math.PI * 2 / n;
+		alphaAnimation = 0;
+		dAlphaAnimation = Math.PI * 2 / 100;
+		animator = new Animator(this);
+
+		geometry();
+		control();
+		appearance();
+		}
+
+	public JPanelConference()
+		{
+		this(RAYON, N, W, H);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	@Override
+	protected void paintComponent(Graphics g)
+		{
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D)g;
+
+		AffineTransform initG2d = g2d.getTransform();
+		dessiner(g2d);
+		g2d.setTransform(initG2d);
+		}
+
+	@Override
+	public void start()
+		{
+		animator.start();
+		}
+
+	@Override
+	public synchronized void stop()
+		{
+		animator.stop();
+		}
+
+	@Override
+	public void animationStep()
+		{
+		alphaAnimation += dAlphaAnimation;
+		repaint();
+		dormir(100);
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private void dessiner(Graphics2D g2d)
+		{
+		centrer(g2d);
+
+		g2d.rotate(alphaAnimation);
+		drawConference(g2d);
+		}
+
+	private void drawConference(Graphics2D g2d)
+		{
+		for(int i = 1; i <= n; i++)
+			{
+			g2d.translate(0, rayon);
+			g2d.draw(rectangle2d);
+			g2d.translate(0, -rayon);
+			g2d.rotate(dAlpha);
+			}
+		}
+
+	private void centrer(Graphics2D g2d)
+		{
+		int w = this.getSize().width;
+		int h = this.getSize().height;
+
+		g2d.translate(w / 2, h / 2);
+		g2d.scale(1, -1);
+		}
+
+	private void geometry()
+		{
+			// JComponent : Instanciation
+
+			// Layout : Specification
+			{
+			FlowLayout flowlayout = new FlowLayout(FlowLayout.CENTER);
+			setLayout(flowlayout);
+
+			// flowlayout.setHgap(20);
+			// flowlayout.setVgap(20);
+			}
+
+		// JComponent : add
+
+		}
+
+	private void control()
+		{
+		// rien
+		}
+
+	private void appearance()
+		{
+		// rien
+		}
+
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
+	private static void dormir(long delayMS)
+		{
+		try
+			{
+			Thread.sleep(delayMS);
+			}
+		catch (InterruptedException e)
+			{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+
+	// Tools
+	private Rectangle2D rectangle2d;
+	private double dAlpha;
+	private double alphaAnimation;
+	private double dAlphaAnimation;
+	private boolean isFini;
+	private boolean isRunning;
+
+	private Animator animator;
+
+	// Inputs
+	private int rayon;
+	private int n;
+	private int w;
+	private int h;
+
+	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
+	public static final int RAYON = 100;
+	public static final int N = 15;
+	public static final int W = 20;
+	public static final int H = 30;
+
+	}

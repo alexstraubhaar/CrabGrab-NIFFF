@@ -1,0 +1,10 @@
+1418908012053	Rename type 'TypeDeCouleur'
+1418908392064	Rename local variable 'colBleu'
+1418908397567	Rename local variable 'colBleuConverted'
+1418908543406	Rename method 'enumtoString'
+1418909784892	Rename type 'UseEnum'
+1418909805580	Move compilation units
+1418910603394	Rename local variable 'quad'
+1418913204950	Extract method 'versionSequential'
+1418913747095	Rename local variable 'string'
+1418913856015	Rename method 'versionParallele'

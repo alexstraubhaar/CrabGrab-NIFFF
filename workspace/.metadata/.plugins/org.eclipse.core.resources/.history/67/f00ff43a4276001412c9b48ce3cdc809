@@ -1,0 +1,63 @@
+
+package ch.hearc.coursjava.moo.dice;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class ExperienceDice implements Runnable
+	{
+	
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+	
+	public ExperienceDice(int nbFace)
+		{
+		//Inputs
+		this.nbFace = nbFace;
+		
+		//Tools
+		this.setfaceObtenus = new HashSet<Integer>(nbFace);
+		}
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+	
+	@Override
+	public void run()
+		{
+		
+		}
+	
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+	
+	public int getNbLancer()
+		{
+		return this.nbLancer;
+		}
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+	
+	private int alea()
+		{
+		
+		}
+	
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+	
+	//Inputs
+	private int nbFace;
+	
+	//Outputs
+	private int nbLancer;
+	
+	//Tools
+	private Set<Integer> setfaceObtenus;
+	}

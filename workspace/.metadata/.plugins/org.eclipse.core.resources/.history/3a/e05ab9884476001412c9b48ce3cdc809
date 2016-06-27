@@ -1,0 +1,59 @@
+
+package ch.hearc.coursjava.moo.dice;
+
+public class Moyenneur implements Runnable
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Constructeurs							*|
+	\*------------------------------------------------------------------*/
+
+	public Moyenneur(int nbExperience)
+		{
+		this.nbExperience = nbExperience;
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	@Override
+	public void run()
+		{
+		for(int i = 1; i <= nbExperience; i++)
+			{
+			ExperienceDice experienceDice = new ExperienceDice(6);
+			}
+		}
+
+	/*------------------------------*\
+	|*				Set				*|
+	\*------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	public int getNbLancerMoyen()
+		{
+		return this.nbLancerMoyen;
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------------------------------------------*\
+	|*							Attributs Private						*|
+	\*------------------------------------------------------------------*/
+	//Inputs
+	private int nbExperience;
+	private int nbFace;
+
+	//Outputs
+	private int nbLancerMoyen;
+
+	//Tools
+
+	}
+

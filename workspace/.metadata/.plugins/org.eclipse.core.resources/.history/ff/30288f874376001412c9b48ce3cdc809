@@ -1,0 +1,32 @@
+
+package ch.hearc.coursjava.moo.dice;
+
+public class UseMoyenneur
+	{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+		{
+		main();
+		}
+
+	public static void main()
+		{
+		useExperience();
+		}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+	private static void useExperience()
+		{
+		// TODO Auto-generated method stub
+
+		}
+
+	}
+

@@ -1,0 +1,32 @@
+
+package ch.hearc.coursjava.moo.pile;
+
+public class UsePile
+	{
+	
+	/*------------------------------------------------------------------*\
+	 |*							Methodes Public							*|
+	 \*------------------------------------------------------------------*/
+	
+	public static void main(String[] args)
+		{
+		main();
+		}
+	
+	public static void main()
+		{
+		Pile pile = new Pile();
+		pile.push(1);
+		System.out.println(pile);
+		pile.push(2);
+		System.out.println(pile);
+		System.out.println(pile.pop());
+		System.out.println(pile.pop());
+		System.out.println(pile);
+		}
+	
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+	
+	}

@@ -1,0 +1,112 @@
+
+package processing;
+
+import java.io.File;
+import java.util.Scanner;
+
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+
+import processing.core.PApplet;
+import processing.core.PVector;
+import processing.data.TableRow;
+import processing.kinect.KinectTracker;
+import processing.seek.Vehicle;
+
+/**
+ *
+ * @author Alexandre Straubhaar
+ *
+ *         This class generates a small vehicle (triangle or crab) that seeks
+ *         the mouse position or the kinect tracking position and stops when it
+ *         reaches it.
+ *
+ */
+
+public class UseSeek extends PApplet
+{
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	public static void main(String[] args)
+	{
+		String[] a = {"MAIN"};
+		PApplet.runSketch(a, new UseSeek());
+	}
+
+	KinectTracker tracker;
+	Vehicle vehicle;
+	Mat matDest;
+	Mat matSrc;
+	Mat matCali;
+
+	public void settings()
+	{
+		// render use OpenGL 2D
+
+		// fullScreen(P2D);
+	}
+
+	@Override
+	public void setup()
+	{
+		size(1280, 720, P2D);
+		vehicle = new Vehicle(this, width / 2, height / 2);
+		tracker = new KinectTracker(this);
+
+		// load openCV
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+		// calibration
+		matCali = new Mat(3, 3, CvType.CV_32F);
+		matSrc = new Mat(1, 1, CvType.CV_32FC2);
+
+		// retrieve matrix
+		Scanner scanner = new Scanner(new File(
+				"C:\\Users\\CRABGRAB\\Desktop\\DEV\\workspace\\CrabGrab\\bin\\processing\\matrix.csv"));
+	}
+
+	@Override
+	public void draw()
+	{
+		background(100);
+		vehicle.display();
+		vehicle.update();
+
+		tracker.track();
+		tracker.display();
+
+		// convert coordinates
+		matSrc.put(0, 0, new float[]{tracker.getPos().x, tracker.getPos().y});
+		Core.perspectiveTransform(matSrc, matDest, matCali);
+
+		vehicle.seek(new PVector((int) matDest.get(0, 0)[0] * 1024,
+				(int) matDest.get(0, 0)[1] * 768));
+	}
+
+	@Override
+	public void keyPressed()
+	{
+		int t = tracker.getThreshold();
+		if (key == CODED)
+		{
+			if (keyCode == UP)
+			{
+				t += 5;
+				tracker.setThreshold(t);
+			} else if (keyCode == DOWN)
+			{
+				t -= 5;
+				tracker.setThreshold(t);
+			}
+		}
+	}
+
+	/*------------------------------------------------------------------*\
+	|*							Methodes Private						*|
+	\*------------------------------------------------------------------*/
+
+}
