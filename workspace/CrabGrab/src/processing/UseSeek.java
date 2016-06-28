@@ -98,13 +98,13 @@ public class UseSeek extends PApplet
 	@Override
 	public void draw()
 	{
-		background(0);
+		background(100);
 		vehicle.display();
 		vehicle.update();
 
-		tracker.setThreshold(2000);
+//		tracker.setThreshold(2000);
 		tracker.track();
-//		tracker.display();
+		// tracker.display();
 
 		// convert coordinates
 		matSrc.put(0, 0, new float[]{tracker.getPos().x, tracker.getPos().y});

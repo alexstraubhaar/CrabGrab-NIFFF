@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;Boid.java&apos; to &apos;CrabGrab/src/processing.flocking&apos;&#x0D;&#x0A;- Original project: &apos;CrabGrab&apos;&#x0D;&#x0A;- Destination element: &apos;CrabGrab/src/processing.flocking&apos;&#x0D;&#x0A;- Original element: &apos;processing.flocking.Boid.java&apos;" description="Copy compilation unit" destination="/src&lt;processing.flocking" element1="/src&lt;processing.flocking{Boid.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1466504226598" units="1" version="1.0"/>
-</session>

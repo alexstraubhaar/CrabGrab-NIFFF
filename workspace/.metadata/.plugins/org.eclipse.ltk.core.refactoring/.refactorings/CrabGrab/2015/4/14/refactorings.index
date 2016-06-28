@@ -1,6 +1,0 @@
-1427977586791	Rename package 'ch.hearc.coursjava.io.bin'
-1427977624335	Move compilation unit
-1427981761965	Rename local variable 'object'
-1427981786070	Rename local variable 'object'
-1427981796118	Rename local variable 'object'
-1427981888037	Extract method 'useSerializationDeserialization'

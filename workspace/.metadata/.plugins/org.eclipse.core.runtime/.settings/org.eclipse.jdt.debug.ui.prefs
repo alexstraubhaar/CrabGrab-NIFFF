@@ -1,6 +1,0 @@
-eclipse.preferences.version=1
-org.eclipse.debug.ui.ExpressionView.org.eclipse.jdt.debug.ui.show_null_entries=true
-org.eclipse.debug.ui.VariableView.org.eclipse.jdt.debug.ui.show_null_entries=true
-org.eclipse.jdt.debug.ui.active_filters=com.ibm.*,com.jogamp.*,com.sun.*,java.*,javax.*,jogamp.opengl.*,jogamp.opengl.gl4.*,jogamp.opengl.windows.wgl.*,jrockit.*,org.omg.*,processing.*,sun.*,sunw.*,java.lang.ClassLoader,jogamp.opengl.gl4.GL4bcProcAddressTable
-org.eclipse.jdt.debug.ui.inactive_filters=
-org.eclipse.jdt.debug.ui.show_monitor_thread_info=true

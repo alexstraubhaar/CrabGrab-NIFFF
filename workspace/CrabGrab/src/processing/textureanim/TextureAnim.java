@@ -57,7 +57,7 @@ public class TextureAnim
 			float py = parent.random(height);
 			parent.translate(px, py);
 			parent.scale(PApplet.map(PApplet.dist(px, py, mouseX, mouseY), 0,
-					width / 2, 150, 15));
+					width, 150, 15));
 			int fi = frameCount + i;
 			float x = fi % DIM * W;
 			float y = fi / DIM % DIM * H;
@@ -92,7 +92,7 @@ public class TextureAnim
 
 	private PImage spritesheet;
 	private int DIM = 4;
-	private int NUMSHAPES = 300;
+	private int NUMSHAPES = 1;
 	private float W = 1.0f / DIM;
 	private float H = 1.0f / DIM;
 }

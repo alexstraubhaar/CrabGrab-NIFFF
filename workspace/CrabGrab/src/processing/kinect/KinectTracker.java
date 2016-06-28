@@ -23,10 +23,13 @@ public class KinectTracker
 		kinect.initDepth();
 		kinect.initDevice();
 
-		display = parent.createImage(kinect.depthWidth, kinect.depthHeight, PConstants.RGB);
+		display = parent.createImage(kinect.depthWidth, kinect.depthHeight,
+				PConstants.RGB);
 
 		loc = new PVector(0, 0);
 		lerpedLoc = new PVector(0, 0);
+		limitRange = 2500;
+		mask = parent.loadImage("Mask.png");
 	}
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
@@ -48,19 +51,29 @@ public class KinectTracker
 		{
 			for (int j = 0; j < kinect.depthHeight; j++)
 			{
-				int offset = kinect.depthWidth - i - 1 + j * kinect.depthWidth;
-				int rawDepth = depth[offset];
+				int offset = i + j * kinect.depthWidth;
 
-				if (rawDepth > 0 && rawDepth < threshold)
+				if (mask.pixels[offset] == parent.color(255, 255, 255))
 				{
-					sumX += i;
-					sumY += j;
-					count++;
+					if (refDepth == null)
+					{
+						captureRef();
+					}
+
+					// Subtraction
+					int rawDepth = depth[offset]; // - refDepth[offset];
+
+					if (rawDepth > limitRange && rawDepth < threshold)
+					{
+						sumX += i;
+						sumY += j;
+						count++;
+					}
 				}
 			}
 		}
 
-		if (count != 0)
+		if (count > 100)
 		{
 			loc = new PVector(sumX / count, sumY / count);
 		}
@@ -72,27 +85,46 @@ public class KinectTracker
 	public void display()
 	{
 		PImage img = kinect.getDepthImage();
+		// img.save("Ref.png");
 
 		display.loadPixels();
+
 		for (int i = 0; i < kinect.depthWidth; i++)
 		{
 			for (int j = 0; j < kinect.depthHeight; j++)
 			{
-				int offset = (kinect.depthWidth - i - 1) + j * kinect.depthWidth;
-				int rawDepth = depth[offset];
-		        int pix = i + j*display.width;
-		        if (rawDepth > 0 && rawDepth < threshold) {
-		          // A red color instead
-		          display.pixels[pix] = parent.color(150, 50, 50);
-		        } else {
-		          display.pixels[pix] = img.pixels[offset];
-		        }
+
+				int pix = i + j * display.width;
+				if (mask.pixels[pix] == parent.color(255, 255, 255))
+				{
+					int offset = kinect.depthWidth * j + i;// (kinect.depthWidth
+															// - i - 1)+ j *
+															// kinect.depthWidth;
+
+					// Subtraction
+					// int rawDepth = Math.abs(depth[offset] -
+					// refDepth[offset]);
+					int rawDepth = depth[offset];
+
+					if (rawDepth > limitRange && rawDepth < threshold)
+					{ // A red color instead
+						display.pixels[pix] = parent.color(50, 150, 50);
+					} else
+					{
+						display.pixels[pix] = img.pixels[pix];
+					}
+				} else
+				{
+					display.pixels[pix] = parent.color(150, 50, 50);
+				}
 			}
 		}
+
 		display.updatePixels();
 
-	    // Draw the image
-	    parent.image(display, parent.width - kinect.depthWidth, parent.height - kinect.depthHeight);
+		// Draw the image
+		parent.image(display, parent.width - kinect.depthWidth,
+				parent.height - kinect.depthHeight);
 	}
 
 	public PVector getLerpedPos()
@@ -113,6 +145,11 @@ public class KinectTracker
 	public void setThreshold(int t)
 	{
 		threshold = t;
+	}
+
+	public void captureRef()
+	{
+		refDepth = kinect.getRawDepth();
 	}
 
 	/*------------------------------*\
@@ -138,6 +175,10 @@ public class KinectTracker
 	private PVector lerpedLoc;
 	private int depth[];
 	private PImage display;
+	PImage mask;
+
+	private int limitRange;
+	private int[] refDepth;
 
 	private Kinect2 kinect;
 }

@@ -12,22 +12,22 @@ public class Flock
 
 	public Flock()
 	{
-		boids = new ArrayList<Boid>();
+		boids = new ArrayList<GeneralBoid>();
 	}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void run(boolean seekMouse)
+	public void run()
 	{
-		for (Boid b : boids)
+		for (GeneralBoid b : boids)
 		{
-			b.run(boids, seekMouse);
+			b.run(boids);
 		}
 	}
 
-	public void addBoid(Boid b)
+	public void addBoid(GeneralBoid b)
 	{
 		boids.add(b);
 	}
@@ -48,6 +48,6 @@ public class Flock
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
-	private ArrayList<Boid> boids; // contient le tout
+	private ArrayList<GeneralBoid> boids; // contient le tout
 }
 
