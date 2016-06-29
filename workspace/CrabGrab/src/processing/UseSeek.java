@@ -3,6 +3,7 @@ package processing;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
 import org.opencv.core.Core;
@@ -102,20 +103,25 @@ public class UseSeek extends PApplet
 		vehicle.display();
 		vehicle.update();
 
-//		tracker.setThreshold(2000);
+		// tracker.setThreshold(2000);
 		tracker.track();
 		// tracker.display();
 
-		// convert coordinates
-		matSrc.put(0, 0, new float[]{tracker.getPos().x, tracker.getPos().y});
-		Core.perspectiveTransform(matSrc, matDest, matCali);
+		List<PVector> listPositions = tracker.getPositions();
+		for (PVector position : listPositions)
+		{
+			// convert coordinates
+			matSrc.put(0, 0,
+					new float[]{position.x, position.y});
+			Core.perspectiveTransform(matSrc, matDest, matCali);
 
-		int targetX = Math.abs((int) (matDest.get(0, 0)[0] * 1024 - 1024));
-		int targetY = (int) (matDest.get(0, 0)[1] * 768);
+			int targetX = Math.abs((int) (matDest.get(0, 0)[0] * 1024 - 1024));
+			int targetY = (int) (matDest.get(0, 0)[1] * 768);
 
-		vehicle.seek(new PVector(targetX, targetY));
-		ellipse((int) (Math.abs(matDest.get(0, 0)[0] * 1024 - 1024)),
-				(int) (matDest.get(0, 0)[1] * 768), 5, 5);
+			vehicle.seek(new PVector(targetX, targetY));
+			ellipse((int) (Math.abs(matDest.get(0, 0)[0] * 1024 - 1024)),
+					(int) (matDest.get(0, 0)[1] * 768), 5, 5);
+		}
 	}
 
 	@Override

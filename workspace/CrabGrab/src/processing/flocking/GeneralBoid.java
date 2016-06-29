@@ -15,6 +15,7 @@ import processing.core.PVector;
  *         interact based on the same set of rules. (sep, coh and align)
  *
  */
+
 public abstract class GeneralBoid
 {
 
@@ -51,10 +52,19 @@ public abstract class GeneralBoid
 		acceleration.add(force);
 	}
 
+	// what do we want to display to represent this object
 	abstract void render();
 
-	// pacman style borders
+	// what happens near the edge of the window
 	abstract void borders();
+
+	// weight getters
+	abstract float getWAli();
+	abstract float getWSep();
+	abstract float getWCoh();
+
+	// speed getter
+	abstract float getMaxSpeed();
 
 	protected void update()
 	{
@@ -67,17 +77,35 @@ public abstract class GeneralBoid
 	// rules application
 	protected void flock(ArrayList<GeneralBoid> boids)
 	{
-		PVector sep = separate(boids);
+		// differenciate crabs and humans for separation
+		ArrayList<GeneralBoid> humans = new ArrayList<GeneralBoid>();
+		ArrayList<GeneralBoid> crabs = new ArrayList<GeneralBoid>();
+
+		for (GeneralBoid generalBoid : boids)
+		{
+			if (generalBoid.getClass() == Crab.class)
+			{
+				crabs.add(generalBoid);
+			} else if (generalBoid.getClass() == Human.class)
+			{
+				humans.add(generalBoid);
+			}
+		}
+
+		PVector sepHuman = separate(humans);
+		PVector sepCrab = separate(crabs);
 		PVector ali = align(boids);
 		PVector coh = cohesion(boids);
 
 		// poids arbitraire sur les forces
-		sep.mult(wsep);
-		ali.mult(wali);
-		coh.mult(wcoh);
+		sepHuman.mult(Human.getWSepStatic());
+		sepCrab.mult(getWSep());
+		ali.mult(getWAli());
+		coh.mult(getWCoh());
 
-		// ajout des vecteurs de force � l'acc�leration
-		applyForce(sep);
+		// adding forces vector to the acceleration
+		applyForce(sepHuman);
+		applyForce(sepCrab);
 		applyForce(ali);
 		applyForce(coh);
 	}
@@ -116,11 +144,10 @@ public abstract class GeneralBoid
 
 	protected float r;
 	protected float maxforce;
-	protected float maxspeed;
+	protected static float maxspeed;
 	protected float theta;
 
-	// weights
-	protected float wsep;
-	protected float wali;
-	protected float wcoh;
+	protected static float neighborLimit;
+	protected static float sepLimit;
+
 }

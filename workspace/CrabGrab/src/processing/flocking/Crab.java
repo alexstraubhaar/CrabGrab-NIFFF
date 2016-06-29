@@ -12,7 +12,8 @@ import processing.core.PVector;
  *
  * @author Alexandre Straubhaar
  *
- *         This class describes the behavior of a Boid (element of the flock).
+ *         This class describes the behavior of a Crab which extends from
+ *         GeneralBoid for interaction purposes.
  *
  */
 public class Crab extends GeneralBoid
@@ -21,46 +22,109 @@ public class Crab extends GeneralBoid
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public Crab(PApplet p, float x, float y, PImage spritesheet)
+	public Crab(PApplet p, float x, float y, float sizeFactor,
+			PImage spritesheet)
 	{
+		// for using Processing functions
 		parent = p;
-		// initialisation
+
+		// movement
 		acceleration = new PVector(0, 0);
 		new PVector();
 		velocity = PVector.random2D();
 		setLocation(new PVector(x, y));
 
 		r = 80.0f;
-		maxspeed = 2.0f;
 		maxforce = 0.03f;
 
+		// animation and render
 		this.spritesheet = spritesheet;
 		offset = (int) parent.random(DIM * DIM);
 		reverse = false;
 
 		parent.noStroke();
 		parent.textureMode(PConstants.NORMAL);
+
+		this.sizeFactor = sizeFactor;
 	}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void run(ArrayList<GeneralBoid> boids, PVector target)
-	{
-		flock(boids, target);
-		update();
-		borders();
-		render();
-	}
-
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
 
 	/*------------------------------*\
+	|*			  Static			*|
+	\*------------------------------*/
+
+	// weights
+	public static void setWAli(float new_wali)
+	{
+		wali = new_wali;
+	}
+	public static void setWSep(float new_wsep)
+	{
+		wsep = new_wsep;
+	}
+	public static void setWCoh(float new_wcoh)
+	{
+		wcoh = new_wcoh;
+	}
+
+	// size
+	public static void setSize(int new_size)
+	{
+		size = new_size;
+	}
+
+	// neighbor
+	public static void setNeighbor(float new_neighborlimit)
+	{
+		neighborLimit = new_neighborlimit;
+	}
+	public static void setSepLimit(float new_sepLimit)
+	{
+		sepLimit = new_sepLimit;
+	}
+	public static void setHumanSepLimit(float new_humanseplimit)
+	{
+		humanSepLimit = new_humanseplimit;
+	}
+
+	// speed
+	public static void setMaxSpeed(float new_maxspeed)
+	{
+		maxspeed = new_maxspeed;
+	}
+
+	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
+
+	@Override
+	float getWAli()
+	{
+		return wali;
+	}
+	@Override
+	float getWSep()
+	{
+		return wsep;
+	}
+	@Override
+	float getWCoh()
+	{
+		return wcoh;
+	}
+
+	@Override
+	float getMaxSpeed()
+	{
+		return maxspeed;
+	}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -93,15 +157,17 @@ public class Crab extends GeneralBoid
 		 * xinv; y = yinv; }
 		 */
 
+		float finalSize = size * sizeFactor;
+
 		parent.pushMatrix();
 		parent.translate(location.x, location.y);
 		parent.rotate(theta);
 		parent.beginShape();
 		parent.texture(spritesheet);
-		parent.vertex(-50, -50, x, y);
-		parent.vertex(50, -50, x + W, y);
-		parent.vertex(50, 50, x + W, y + H);
-		parent.vertex(-50, 50, x, y + H);
+		parent.vertex(-finalSize, -finalSize, x, y);
+		parent.vertex(finalSize, -finalSize, x + W, y);
+		parent.vertex(finalSize, finalSize, x + W, y + H);
+		parent.vertex(-finalSize, finalSize, x, y + H);
 		parent.endShape();
 		parent.popMatrix();
 
@@ -138,30 +204,11 @@ public class Crab extends GeneralBoid
 		acceleration.mult(0.0f);
 	}
 
-	// applying rules
-	private void flock(ArrayList<GeneralBoid> boids, PVector target)
-	{
-		PVector sep = separate(boids);
-		PVector ali = align(boids);
-		PVector coh = cohesion(boids);
-
-		// poids arbitraire sur les forces
-		sep.mult(1.5f);
-		ali.mult(1.0f);
-		coh.mult(1.5f);
-
-		// ajout des vecteurs de force � l'acc�leration
-		applyForce(sep);
-		applyForce(ali);
-		applyForce(coh);
-	}
-
 	// follow the flock
 	@Override
 	PVector cohesion(ArrayList<GeneralBoid> boids)
 	{
-
-		float neighbordist = 50.0f;
+		float neighbordist = neighborLimit;
 		PVector sum = new PVector(0, 0);
 		int count = 0;
 
@@ -189,7 +236,7 @@ public class Crab extends GeneralBoid
 	@Override
 	PVector align(ArrayList<GeneralBoid> boids)
 	{
-		float neighbordist = 50.0f;
+		float neighbordist = neighborLimit;
 		PVector sum = new PVector(0, 0);
 		int count = 0;
 
@@ -220,13 +267,23 @@ public class Crab extends GeneralBoid
 	@Override
 	PVector separate(ArrayList<GeneralBoid> boids)
 	{
-		float desiredseparation = 50.0f;
+		float desiredseparation = 0.0f;
 		PVector steer = new PVector(0, 0, 0);
 		int count = 0;
 
 		// too close ?
 		for (GeneralBoid other : boids)
 		{
+			// human or crab ?
+			if (other.getClass() == Crab.class)
+			{
+				desiredseparation = sepLimit;
+			}
+			else if (other.getClass() == Human.class)
+			{
+				desiredseparation = humanSepLimit;
+			}
+
 			float d = PVector.dist(getLocation(), other.getLocation());
 			if ((d > 0) && (d < desiredseparation))
 			{
@@ -263,18 +320,9 @@ public class Crab extends GeneralBoid
 	public PVector seek(PVector target)
 	{
 		PVector desired = PVector.sub(target, location);
-		float d = desired.mag();
-		desired.normalize();
+		desired.setMag(maxspeed);
 
-		if (d < 100)
-		{
-			float m = PApplet.map(d, 0, 100, 0, maxspeed);
-			desired.mult(m);
-		} else
-		{
-			desired.mult(maxspeed);
-		}
-
+		// minimal desired velocity
 		PVector steer = PVector.sub(desired, velocity);
 		steer.limit(maxforce);
 		return steer;
@@ -296,18 +344,6 @@ public class Crab extends GeneralBoid
 		this.location = location;
 	}
 
-	// parent class
-	private PApplet parent;
-
-	private PVector location;
-	private PVector velocity;
-	private PVector acceleration;
-
-	private float r;
-	private float maxforce;
-	private float maxspeed;
-	private float theta;
-
 	// crab
 	private PImage spritesheet;
 	private int DIM = 4; // spritesheet 4x4
@@ -317,4 +353,13 @@ public class Crab extends GeneralBoid
 	private int offset;
 	private boolean reverse;
 
+	// size
+	private static int size;
+	private float sizeFactor;
+	private static float humanSepLimit;
+
+	// weights of rules
+	private static float wsep;
+	private static float wali;
+	private static float wcoh;
 }

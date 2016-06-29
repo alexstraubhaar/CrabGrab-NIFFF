@@ -1,8 +1,16 @@
 
 package processing.kinect;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.imgproc.Imgproc;
 import org.openkinect.processing.Kinect2;
 
+import gab.opencv.OpenCV;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
@@ -26,7 +34,7 @@ public class KinectTracker
 		display = parent.createImage(kinect.depthWidth, kinect.depthHeight,
 				PConstants.RGB);
 
-		loc = new PVector(0, 0);
+		listLocation = new ArrayList<>();
 		lerpedLoc = new PVector(0, 0);
 		limitRange = 2500;
 		mask = parent.loadImage("Mask.png");
@@ -43,43 +51,79 @@ public class KinectTracker
 			return;
 		}
 
-		float sumX = 0.0f;
-		float sumY = 0.0f;
-		float count = 0.0f;
-
-		for (int i = 0; i < kinect.depthWidth; i++)
+		PImage pImage = kinect.getDepthImage();
+		if (thresholdImage == null)
 		{
-			for (int j = 0; j < kinect.depthHeight; j++)
+			thresholdImage = new Mat(pImage.width, pImage.height,
+					CvType.CV_32S);
+		}
+		for (int i = 0; i < pImage.width; i++)
+		{
+			for (int j = 0; j < pImage.height; j++)
 			{
+
 				int offset = i + j * kinect.depthWidth;
 
-				if (mask.pixels[offset] == parent.color(255, 255, 255))
+				// Subtraction
+				int rawDepth = depth[offset]; // - refDepth[offset];
+
+				if (rawDepth > limitRange && rawDepth < threshold
+						&& mask.get(i, j) == parent.color(255, 255, 255))
 				{
-					if (refDepth == null)
-					{
-						captureRef();
-					}
-
-					// Subtraction
-					int rawDepth = depth[offset]; // - refDepth[offset];
-
-					if (rawDepth > limitRange && rawDepth < threshold)
-					{
-						sumX += i;
-						sumY += j;
-						count++;
-					}
+					thresholdImage.put(j, i, new int[]{pImage.get(i, j)});
+				} else
+				{
+					thresholdImage.put(j, i, new int[]{0});
 				}
 			}
 		}
 
-		if (count > 100)
+		contours.clear();
+		Imgproc.findContours(thresholdImage, contours, new Mat(),
+				Imgproc.RETR_CCOMP, Imgproc.CHAIN_APPROX_SIMPLE);
+
+		if (contours.size() >= 1)
 		{
-			loc = new PVector(sumX / count, sumY / count);
+			listLocation.clear();
+			for (MatOfPoint blob : contours)
+			{
+				if (blob.size().height > 20)
+				{
+					PVector center = new PVector(0, 0);
+					double x = 0;
+					double y = 0;
+					for (int i = 0; i < blob.size().height; i++)
+					{
+						x += blob.get(i, 0)[0];
+						y += blob.get(i, 0)[1];
+					}
+					center.set((int) (x / blob.size().height),
+							(int) (y / blob.size().height));
+					listLocation.add(center);
+				}
+			}
 		}
 
-		lerpedLoc.x = PApplet.lerp(lerpedLoc.x, loc.x, 0.3f);
-		lerpedLoc.y = PApplet.lerp(lerpedLoc.y, loc.y, 0.3f);
+		/*
+		 *
+		 * float sumX = 0.0f; float sumY = 0.0f; float count = 0.0f;
+		 *
+		 * for (int i = 0; i < kinect.depthWidth; i++) { for (int j = 0; j <
+		 * kinect.depthHeight; j++) { int offset = i + j * kinect.depthWidth;
+		 *
+		 * if (mask.pixels[offset] == parent.color(255, 255, 255)) { if
+		 * (refDepth == null) { captureRef(); }
+		 *
+		 * // Subtraction int rawDepth = depth[offset]; // - refDepth[offset];
+		 *
+		 * if (rawDepth > limitRange && rawDepth < threshold) { sumX += i; sumY
+		 * += j; count++; } } } }
+		 *
+		 * if (count > 100) { loc = new PVector(sumX / count, sumY / count); }
+		 */
+
+		// lerpedLoc.x = PApplet.lerp(lerpedLoc.x, getPos().x, 0.3f);
+		// lerpedLoc.y = PApplet.lerp(lerpedLoc.y, getPos().y, 0.3f);
 	}
 
 	public void display()
@@ -132,9 +176,9 @@ public class KinectTracker
 		return lerpedLoc;
 	}
 
-	public PVector getPos()
+	public List<PVector> getPositions()
 	{
-		return loc;
+		return listLocation;
 	}
 
 	public int getThreshold()
@@ -169,9 +213,11 @@ public class KinectTracker
 	\*------------------------------------------------------------------*/
 
 	private PApplet parent;
+	private Mat thresholdImage = null;
+	private List<MatOfPoint> contours = new ArrayList<>();
 
 	private int threshold = 745;
-	private PVector loc;
+	private List<PVector> listLocation;
 	private PVector lerpedLoc;
 	private int depth[];
 	private PImage display;
@@ -179,6 +225,8 @@ public class KinectTracker
 
 	private int limitRange;
 	private int[] refDepth;
+
+	OpenCV opencv;
 
 	private Kinect2 kinect;
 }
