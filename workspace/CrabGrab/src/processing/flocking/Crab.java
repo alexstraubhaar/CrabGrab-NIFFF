@@ -33,6 +33,7 @@ public class Crab extends GeneralBoid
 		new PVector();
 		velocity = PVector.random2D();
 		setLocation(new PVector(x, y));
+		outOfBounds = false;
 
 		r = 80.0f;
 		maxforce = 0.03f;
@@ -40,7 +41,7 @@ public class Crab extends GeneralBoid
 		// animation and render
 		this.spritesheet = spritesheet;
 		offset = (int) parent.random(DIM * DIM);
-		reverse = false;
+		zoomValue = 0.0f;
 
 		parent.noStroke();
 		parent.textureMode(PConstants.NORMAL);
@@ -93,6 +94,10 @@ public class Crab extends GeneralBoid
 	{
 		humanSepLimit = new_humanseplimit;
 	}
+	public static void setHumanNeigh(float new_humanneigh)
+	{
+		humanNeighCoh = new_humanneigh;
+	}
 
 	// speed
 	public static void setMaxSpeed(float new_maxspeed)
@@ -126,6 +131,12 @@ public class Crab extends GeneralBoid
 		return maxspeed;
 	}
 
+	// outOfBounds ?
+	public boolean getOutOfBounds()
+	{
+		return outOfBounds;
+	}
+
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -142,26 +153,28 @@ public class Crab extends GeneralBoid
 		// draw a crab in the velocity direction
 		theta = (float) (velocity.heading() + Math.toRadians(90.0));
 
-		f = parent.frameCount / 10;
+		// TODO
+		// is used to adapt animation speed and movement
+		// float value = ((velocity.mag() / maxspeed));
+
+		f = (int) (parent.frameCount / 0.5f);
 
 		int fi = f + offset;
 		float x = fi % DIM * W;
 		float y = fi / DIM % DIM * H;
 
-		int i = fi % (DIM * DIM);
-		/*
-		 * float xinv = Math.abs(x - DIM + 1); float yinv = Math.abs(y - DIM +
-		 * 1);
-		 *
-		 * if (i >= DIM * DIM - 1) { reverse = !reverse; } if (reverse) { x =
-		 * xinv; y = yinv; }
-		 */
-
 		float finalSize = size * sizeFactor;
+
+		// makes crabs appear
+		if (zoomValue < 1.0f)
+		{
+			zoomValue += 0.05;
+		}
 
 		parent.pushMatrix();
 		parent.translate(location.x, location.y);
 		parent.rotate(theta);
+		parent.scale(zoomValue);
 		parent.beginShape();
 		parent.texture(spritesheet);
 		parent.vertex(-finalSize, -finalSize, x, y);
@@ -173,25 +186,14 @@ public class Crab extends GeneralBoid
 
 	}
 
-	// pacman style borders
+	// out of bounds detection
 	@Override
 	void borders()
 	{
-		if (getLocation().x < -r)
+		if (location.x < -r || location.y < -r || location.x > parent.width + r
+				|| location.y > parent.height + r)
 		{
-			getLocation().x = parent.width + r;
-		}
-		if (getLocation().y < -r)
-		{
-			getLocation().y = parent.height + r;
-		}
-		if (getLocation().x > parent.width + r)
-		{
-			getLocation().x = -r;
-		}
-		if (getLocation().y > parent.height + r)
-		{
-			getLocation().y = -r;
+			outOfBounds = true;
 		}
 	}
 
@@ -208,12 +210,21 @@ public class Crab extends GeneralBoid
 	@Override
 	PVector cohesion(ArrayList<GeneralBoid> boids)
 	{
-		float neighbordist = neighborLimit;
+		float neighbordist = 0.0f;
 		PVector sum = new PVector(0, 0);
 		int count = 0;
 
 		for (GeneralBoid other : boids)
 		{
+			// human or crab ?
+			if (other.getClass() == Crab.class)
+			{
+				neighbordist = neighborLimit;
+			} else if (other.getClass() == Human.class)
+			{
+				neighbordist = humanNeighCoh;
+			}
+
 			float d = PVector.dist(getLocation(), other.getLocation());
 			if ((d > 0) && (d < neighbordist))
 			{
@@ -278,8 +289,7 @@ public class Crab extends GeneralBoid
 			if (other.getClass() == Crab.class)
 			{
 				desiredseparation = sepLimit;
-			}
-			else if (other.getClass() == Human.class)
+			} else if (other.getClass() == Human.class)
 			{
 				desiredseparation = humanSepLimit;
 			}
@@ -328,6 +338,31 @@ public class Crab extends GeneralBoid
 		return steer;
 	}
 
+	// Trying the repel function
+	public void repelForce(PVector obstacle, float radius)
+	{
+		PVector futPos = PVector.add(location, velocity);
+		PVector dist = PVector.sub(obstacle, futPos);
+		float d = dist.mag();
+
+		if (d <= radius)
+		{
+			PVector repelVec = PVector.sub(location, obstacle);
+			repelVec.normalize();
+			if (d != 0)
+			{
+				repelVec.normalize();
+				repelVec.mult(maxforce + 7);
+
+				if (repelVec.mag() < 0)
+				{
+					repelVec.y = 0;
+				}
+			}
+			applyForce(repelVec);
+		}
+	}
+
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
@@ -351,12 +386,14 @@ public class Crab extends GeneralBoid
 	private float H = 1.0f / DIM;
 	private int f;
 	private int offset;
-	private boolean reverse;
+	private boolean outOfBounds;
+	private float zoomValue;
 
 	// size
 	private static int size;
 	private float sizeFactor;
 	private static float humanSepLimit;
+	private static float humanNeighCoh;
 
 	// weights of rules
 	private static float wsep;

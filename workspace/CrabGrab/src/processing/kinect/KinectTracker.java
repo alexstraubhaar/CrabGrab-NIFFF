@@ -37,7 +37,7 @@ public class KinectTracker
 		listLocation = new ArrayList<>();
 		lerpedLoc = new PVector(0, 0);
 		limitRange = 2500;
-		mask = parent.loadImage("Mask.png");
+		mask = parent.loadImage("img\\Mask.png");
 	}
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
@@ -103,27 +103,6 @@ public class KinectTracker
 				}
 			}
 		}
-
-		/*
-		 *
-		 * float sumX = 0.0f; float sumY = 0.0f; float count = 0.0f;
-		 *
-		 * for (int i = 0; i < kinect.depthWidth; i++) { for (int j = 0; j <
-		 * kinect.depthHeight; j++) { int offset = i + j * kinect.depthWidth;
-		 *
-		 * if (mask.pixels[offset] == parent.color(255, 255, 255)) { if
-		 * (refDepth == null) { captureRef(); }
-		 *
-		 * // Subtraction int rawDepth = depth[offset]; // - refDepth[offset];
-		 *
-		 * if (rawDepth > limitRange && rawDepth < threshold) { sumX += i; sumY
-		 * += j; count++; } } } }
-		 *
-		 * if (count > 100) { loc = new PVector(sumX / count, sumY / count); }
-		 */
-
-		// lerpedLoc.x = PApplet.lerp(lerpedLoc.x, getPos().x, 0.3f);
-		// lerpedLoc.y = PApplet.lerp(lerpedLoc.y, getPos().y, 0.3f);
 	}
 
 	public void display()
@@ -141,13 +120,8 @@ public class KinectTracker
 				int pix = i + j * display.width;
 				if (mask.pixels[pix] == parent.color(255, 255, 255))
 				{
-					int offset = kinect.depthWidth * j + i;// (kinect.depthWidth
-															// - i - 1)+ j *
-															// kinect.depthWidth;
+					int offset = kinect.depthWidth * j + i;
 
-					// Subtraction
-					// int rawDepth = Math.abs(depth[offset] -
-					// refDepth[offset]);
 					int rawDepth = depth[offset];
 
 					if (rawDepth > limitRange && rawDepth < threshold)
@@ -165,10 +139,6 @@ public class KinectTracker
 		}
 
 		display.updatePixels();
-
-		// Draw the image
-		parent.image(display, parent.width - kinect.depthWidth,
-				parent.height - kinect.depthHeight);
 	}
 
 	public PVector getLerpedPos()
@@ -203,6 +173,11 @@ public class KinectTracker
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
+
+	public PImage getDisplay()
+	{
+		return display;
+	}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|

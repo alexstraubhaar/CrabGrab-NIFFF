@@ -2,8 +2,9 @@
 package processing.flocking;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Flock
+public class Flock implements Iterable<GeneralBoid>
 {
 
 	/*------------------------------------------------------------------*\
@@ -32,6 +33,30 @@ public class Flock
 		boids.add(b);
 	}
 
+	@Override
+	public Iterator<GeneralBoid> iterator()
+	{
+		Iterator<GeneralBoid> it = new Iterator<GeneralBoid>() {
+
+			private int currentIndex = 0;
+			private int currentSize = boids.size();
+
+			@Override
+			public boolean hasNext()
+			{
+				return currentIndex < currentSize && boids.get(currentIndex) != null;
+			}
+
+			@Override
+			public GeneralBoid next()
+			{
+				return boids.get(currentIndex++);
+			}
+
+		};
+		return it;
+	}
+
 	/*------------------------------*\
 	|*				Set				*|
 	\*------------------------------*/
@@ -48,6 +73,6 @@ public class Flock
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
-	private ArrayList<GeneralBoid> boids; // contient le tout
+	private ArrayList<GeneralBoid> boids; // contains everything
 }
 

@@ -67,40 +67,8 @@ public class Human extends GeneralBoid
 	@Override
 	PVector separate(ArrayList<GeneralBoid> boids)
 	{
-		/*
-		float desiredseparation = 50.0f;
-		PVector steer = new PVector(0, 0, 0);
-		int count = 0;
-
-		// too close ?
-		for (GeneralBoid other : boids)
-		{
-			float d = PVector.dist(getLocation(), other.getLocation());
-			if ((d > 0) && (d < desiredseparation))
-			{
-				PVector diff = PVector.sub(getLocation(), other.getLocation());
-				diff.normalize();
-				diff.div(d);
-				steer.add(diff);
-				count++;
-			}
-		}
-
-		if (count > 0)
-		{
-			steer.div(count);
-		}
-
-		if (steer.mag() > 0)
-		{
-			steer.setMag(maxspeed);
-			steer.sub(velocity);
-			steer.limit(maxforce);
-		}
-
-		return steer;
-		*/
-		return new PVector(0,0);
+		// the human vs crab behavior is in Crab.java
+		return new PVector(0, 0);
 	}
 
 	// no need to seek for humans

@@ -125,7 +125,7 @@ public abstract class GeneralBoid
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
-	protected PVector getLocation()
+	public PVector getLocation()
 	{
 		return location;
 	}
